@@ -39,6 +39,22 @@ public class PokemonController {
         return "redirect:/pokemon";
     }
 
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Pokemon pokemon = pokemonRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Pokemon ID:" + id));
+        model.addAttribute("pokemon", pokemon);
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "pokemon/edit";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updatePokemon(@PathVariable Long id, @ModelAttribute Pokemon pokemon) {
+        pokemon.setId(id);
+        pokemonRepository.save(pokemon);
+        return "redirect:/pokemon";
+    }
+
     @GetMapping("/delete/{id}")
     public String deletePokemon(@PathVariable Long id) {
         pokemonRepository.deleteById(id);

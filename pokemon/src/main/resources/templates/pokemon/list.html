@@ -17,16 +17,19 @@
         <div class="col-md-8 offset-md-2">
             <div th:each="pokemon : ${pokemonList}" class="card mb-3 shadow-sm">
                 <div class="card-body">
+
                     <h5 class="card-title fw-bold" th:text="${pokemon.name}">Pokemon Name</h5>
+
                     <p class="card-text text-muted"
                        th:text="${pokemon.category != null ? pokemon.category.category : 'No Category Assigned'}">
                         Category
                     </p>
-                    <a th:href="@{'/pokemon/delete/' + ${pokemon.id}}"
-                       class="btn btn-sm btn-danger mt-2"
-                       onclick="return confirm('Are you sure you want to delete this Pokémon?');">
-                        Delete
-                    </a>
+
+                    <div class="d-flex gap-2">
+                        <a th:href="@{'/pokemon/edit/' + ${pokemon.id}}" class="btn btn-sm btn-warning">Edit</a>
+                        <a th:href="@{'/pokemon/delete/' + ${pokemon.id}}" class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this Pokémon?');">Delete</a>
+                    </div>
                 </div>
             </div>
         </div>
