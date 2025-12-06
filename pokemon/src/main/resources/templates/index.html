@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokemon Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+    <style>
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Pokemon Dashboard</h1>
+
+    <table class="table table-striped table-bordered shadow-sm">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">Pokemon Name</th>
+            <th scope="col">Category</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pokemon : ${pokemonList}">
+            <td th:text="${pokemon.name}">Pokemon Name</td>
+            <td th:text="${pokemon.category != null ? pokemon.category.category : 'No Category'}">Type</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+        <a href="/pokemon/add" class="btn btn-primary">Create Pokemon</a>
+    </div>
+</div>
+</body>
+</html>
